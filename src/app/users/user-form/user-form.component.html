@@ -1,0 +1,67 @@
+<div class="container mt-5">
+  <h2>Registrar Usuario</h2>
+
+  <form [formGroup]="userForm" (ngSubmit)="createUser()">
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="nombre" formControlName="nombre">
+    </div>
+
+    <div class="mb-3">
+      <label for="apellido" class="form-label">Apellido</label>
+      <input type="text" class="form-control" id="apellido" formControlName="apellido">
+    </div>
+
+    <div class="mb-3">
+      <label for="cedula" class="form-label">Cédula</label>
+      <input type="text" class="form-control" id="cedula" formControlName="cedula">
+    </div>
+
+    <div class="mb-3">
+      <label for="correo" class="form-label">Correo</label>
+      <input type="email" class="form-control" id="correo" formControlName="correo">
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Contraseña</label>
+      <div class="input-group">
+        <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password" formControlName="password">
+        <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility('password')">
+          {{ showPassword ? '🙈' : '👁️' }}
+        </button>
+      </div>
+      <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched" class="text-danger">
+        <small *ngIf="userForm.get('password')?.errors?.['required']">La contraseña es obligatoria.</small>
+        <small *ngIf="userForm.get('password')?.errors?.['minlength']">Debe tener al menos 8 caracteres.</small>
+        <small *ngIf="userForm.get('password')?.errors?.['weakPassword']">
+          La contraseña debe incluir:
+          <ul>
+            <li>Una letra mayúscula</li>
+            <li>Una letra minúscula</li>
+            <li>Un número</li>
+            <li>Un carácter especial ($, !, %, *, ?, &)</li>
+          </ul>
+        </small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+      <div class="input-group">
+        <input [type]="showConfirmPassword ? 'text' : 'password'" class="form-control" id="confirmPassword" formControlName="confirmPassword">
+        <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility('confirmPassword')">
+          {{ showConfirmPassword ? '🙈' : '👁️' }}
+        </button>
+      </div>
+      <div *ngIf="userForm.errors?.['mismatch'] && userForm.get('confirmPassword')?.touched" class="text-danger">
+        <small>Las contraseñas no coinciden.</small>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success w-100" [disabled]="userForm.invalid">Registrar</button>
+  </form>
+
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    {{ errorMessage }}
+  </div>
+</div>

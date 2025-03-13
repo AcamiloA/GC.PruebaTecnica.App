@@ -1,0 +1,46 @@
+<div class="container mt-5">
+  <h2>Lista de Usuarios</h2>
+  <a [routerLink]="['/users/create']" class="btn btn-success">+ Agregar Usuario</a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Cédula</th>
+        <th>Correo</th>
+        <th>Último Acceso</th>
+        <th>Clasificación</th>
+        <th>Puntaje</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.nombre }}</td>
+        <td>{{ user.apellido }}</td>
+        <td>{{ user.cedula }}</td>
+        <td>{{ user.correo }}</td>
+        <td>{{ user.ultimoAcceso ? (user.ultimoAcceso | date: 'yyyy-MM-dd HH:mm') : 'Sin datos' }}</td>
+        <td>
+          <span class="badge" [ngClass]="{
+            'badge-success': user.clasificacion === 'Hechicero',
+            'badge-warning': user.clasificacion === 'Luchador',
+            'badge-primary': user.clasificacion === 'Explorador',
+            'badge-danger': user.clasificacion === 'Olvidado'
+          }">
+            {{ user.clasificacion }}
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-dark">{{ user.puntaje || 0 }}</span>
+        </td>
+        <td>
+          <a [routerLink]="['/users/edit', user.id]" class="btn btn-primary btn-sm">Editar</a>
+          <button (click)="deleteUser(user.id)" class="btn btn-danger btn-sm">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>    
+  </table>
+</div>

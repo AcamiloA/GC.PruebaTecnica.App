@@ -1,0 +1,11 @@
+<div class="container mt-5">
+    <h2>Editar Usuario</h2>
+    <form (ngSubmit)="updateUser()">
+      <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="user.nombre" name="nombre" required>
+      <input type="text" class="form-control" placeholder="Apellido" [(ngModel)]="user.apellido" name="apellido" required>
+      <input type="text" class="form-control" placeholder="Cédula" [(ngModel)]="user.cedula" name="cedula" required>
+      <input type="email" class="form-control" placeholder="Correo" [(ngModel)]="user.correo" name="correo" required>
+      <button type="submit" class="btn btn-success mt-3">Guardar Cambios</button>
+    </form>
+  </div>
+  
