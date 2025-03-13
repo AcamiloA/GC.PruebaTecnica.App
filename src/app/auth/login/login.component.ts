@@ -19,6 +19,10 @@ export class LoginComponent {
     private cookieService: CookieService
   ) {}
 
+  ngOnInit() {
+    this.authService.clearAuth(); 
+  }
+
   login() {
     const user = { correo: this.correo, password: this.password };
 
