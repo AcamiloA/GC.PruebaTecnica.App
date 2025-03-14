@@ -29,7 +29,7 @@ export class UserFormComponent {
     }, { validators: this.passwordsMatchValidator });
   }
 
-  // 🔹 Validador de seguridad de contraseña
+  // Validador de seguridad de contraseña
   passwordStrengthValidator(control: AbstractControl): ValidationErrors | null {
     const value: string = control.value || '';
     if (!value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)) {
@@ -38,7 +38,7 @@ export class UserFormComponent {
     return null;
   }
 
-  // 🔹 Validador para comparar contraseña y confirmación
+  // Validador para comparar contraseña y confirmación
   passwordsMatchValidator(form: FormGroup) {
     return form.get('password')?.value === form.get('confirmPassword')?.value
       ? null
